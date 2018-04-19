@@ -37,20 +37,14 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.1.0",
-<<<<<<< HEAD
-=======
     "ember-welcome-page": "^3.0.0",
->>>>>>> 9591062999fdb65876d678944ccdfc34b58573d6
     "eslint-plugin-ember": "^5.0.0",
     "loader.js": "^4.2.3"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
-<<<<<<< HEAD
   },
   "dependencies": {
     "ember-cli-sass": "^7.1.7"
-=======
->>>>>>> 9591062999fdb65876d678944ccdfc34b58573d6
   }
 }
