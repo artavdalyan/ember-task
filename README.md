@@ -1,7 +1,6 @@
 # ember-task
 
 # Task: 
-
 Backend I use firebase 
 Create small shop demo with products, lists and prices(see screenshot).
 
@@ -28,6 +27,5 @@ Find useful EmberJS guides in these links:
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
- Backend I  use firebase 
 ![alt text](https://preview.ibb.co/faNPhS/Ash2.jpg)
 ![alt text](https://preview.ibb.co/ip7PhS/Ash_3.jpg)
