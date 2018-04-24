@@ -1,0 +1,11 @@
+<div class="shops">
+  <h1 class="shops__title">Shops</h1>
+  <div class="shops__items">
+    {{#each model as |shop|}}
+      {{my-shop shop=shop}}
+    {{/each}}
+  </div>
+  <div class="addShops">
+    <button>Add Shops</button>
+  </div>
+</div>
