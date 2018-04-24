@@ -1,8 +1,10 @@
 import DS from 'ember-data';
 
+const {attr, belongsTo} = DS;
+
 export default DS.Model.extend({
-  name: DS.attr('string'),
-  qty: DS.attr('number'),
-  price: DS.attr('number'),
-  shop: DS.belongsTo('shop')
+  name: attr('string'),
+  qty: attr('number'),
+  price: attr('number'),
+  shop: belongsTo('shop')
 });

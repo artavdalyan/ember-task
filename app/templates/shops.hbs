@@ -6,6 +6,25 @@
     {{/each}}
   </div>
   <div class="addShops">
-    <button>Add Shops</button>
+    <button {{action "openModal"}}>Add Shops</button>
   </div>
 </div>
+{{#if isShowingModal}}
+  {{#modal-dialog }}
+    <div class="modal">
+      <div class="modal-body">
+        {{input value = shopName placeholder='Shop name'}}
+        {{#if errorMessage}}
+          <div class="error-message">
+            Name is required
+          </div>
+        {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button {{action 'create'}}>Save</button>
+        <button {{action  'cancel'}}> Cancel</button>
+      </div>
+
+    </div>
+  {{/modal-dialog}}
+{{/if}}

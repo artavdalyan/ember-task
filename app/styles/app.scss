@@ -1,10 +1,22 @@
- html {
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+
+html {
    font-size: 16px;
  }
 body {
   font-family: Arial, sans-serif;
 }
+button {
+  cursor: pointer;
+}
 
+* , *::after, *::before{
+  box-sizing: border-box;
+}
+* {
+  outline: 0;
+}
 h1 {
   text-transform: uppercase;
   font-weight: 200;
@@ -24,13 +36,31 @@ h1 {
      padding: 50px 30px 50px 50px;
    }
    &__item{
-     padding: 15px 0;
+     padding: 15px 0 5px;
      border-bottom: 1px solid #e8e8e8;
      letter-spacing: 1.5px;
      color: grey;
      display: flex;
      justify-content: space-between;
-
+     &__title{
+       flex-grow: 1;
+     }
+     input {
+      width: 100%;
+      height: 100%; 
+      border: 0;
+      outline: 0;
+      background-color: whitesmoke;
+      color: #a6a6a6;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+     }
+     .error-message{
+      padding-top: 8px;
+      font-size: 10px;
+      color: red;
+     }
    }
    &__buttons{
       display: flex;
@@ -57,6 +87,12 @@ h1 {
        }
 
      }
+     &__cancel{
+       button{
+         background-color: #ea5050;
+       }
+
+     }
    }
    .addShops{
      margin-top: 30px;
@@ -72,3 +108,32 @@ h1 {
      }
    }
  }
+ .modal {
+   display: flex;
+   flex-direction: column;
+   input[type='text']{
+     border: 0;
+     border-bottom: 0.2px solid grey;
+     outline :0;
+     padding: 10px 20px;
+   }
+   > div{
+     margin: 15px;
+   }
+   .modal-footer{
+     text-align: right;
+     button {
+       border: 0;
+       padding: 8px 20px;
+     }
+     button:first-child {
+       color: #FFFFFF;
+       background-color: #0e64cc;
+     }
+   }
+   .error-message{
+     padding: 10px;
+     color: red;
+   }
+ }
+

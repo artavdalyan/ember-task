@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 
+const {attr, hasMany} = DS;
 export default DS.Model.extend({
-  name: DS.attr('string'),
-  products: DS.hasMany('product')
+  name: attr('string'),
+  products: hasMany('product')
 });

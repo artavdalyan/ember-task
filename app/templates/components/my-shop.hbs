@@ -1,11 +1,32 @@
 <div class="shops__item">
-  <div class="shops__item__title">{{shop.name}}</div>
-  <div class="shops__buttons">
-    <div class="shops__buttons__edit">
-      <button>Edit</button>
-    </div>
-    <div class="shops__buttons__delete">
-      <button>Delete</button>
-    </div>
+  <div class="shops__item__title">
+    {{input  value=shop.name readonly=isEdit}}
+    {{#if errorMessage}}
+          <div class="error-message">
+            Name is required
+          </div>
+        {{/if}}
+    {{#link-to 'product' shop.id }}
+         {{shop.name}}
+    {{/link-to}}
   </div>
+  {{#unless isEdit}}
+     <div class="shops__buttons">
+      <div class="shops__buttons__save">
+        <button {{action 'save' shop.id}}>Save</button>
+      </div>
+      <div class="shops__buttons__cancel">
+        <button {{action 'cancel'}}>Cancel</button>
+      </div>
+    </div>
+    {{else}}
+      <div class="shops__buttons">
+      <div class="shops__buttons__edit">
+        <button {{action 'editShop' shop.id}}>Edit</button>
+      </div>
+      <div class="shops__buttons__delete">
+        <button {{action 'deleteShop' shop.id}}>Delete</button>
+      </div>
+    </div>
+  {{/unless}}
 </div>
