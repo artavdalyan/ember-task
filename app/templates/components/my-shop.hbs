@@ -1,17 +1,20 @@
 <div class="shops__item">
   <div class="shops__item__title">
-    {{input  value=shop.name readonly=isEdit}}
+    {{#unless isEdit}}
+      {{input  value=shop.name readonly=isEdit}}
+    {{else}}
+      {{#link-to 'product' shop.id }}
+        {{input  value=shop.name readonly=isEdit}}
+      {{/link-to}}
+    {{/unless}}
     {{#if errorMessage}}
-          <div class="error-message">
-            Name is required
-          </div>
-        {{/if}}
-    {{#link-to 'product' shop.id }}
-         {{shop.name}}
-    {{/link-to}}
+      <div class="error-message">
+        Name is required
+      </div>
+    {{/if}}
   </div>
   {{#unless isEdit}}
-     <div class="shops__buttons">
+    <div class="shops__buttons">
       <div class="shops__buttons__save">
         <button {{action 'save' shop.id}}>Save</button>
       </div>
@@ -19,8 +22,8 @@
         <button {{action 'cancel'}}>Cancel</button>
       </div>
     </div>
-    {{else}}
-      <div class="shops__buttons">
+  {{else}}
+    <div class="shops__buttons">
       <div class="shops__buttons__edit">
         <button {{action 'editShop' shop.id}}>Edit</button>
       </div>
