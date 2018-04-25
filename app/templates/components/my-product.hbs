@@ -1,6 +1,6 @@
 <ul class="product-item">
   {{#unless isEdit}}
-    <li>{{product.name}}</li>
+    <li class="name">{{product.name}}</li>
     <li class="qty">{{product.qty}}</li>
     <li class="price">$ {{product.price}}
       <span class="noEdit">
@@ -9,7 +9,7 @@
         </span>
     </li>
     {{else}}
-    <li>
+    <li class="name">
       {{input  value=product.name}}
     </li>
     <li class="qty">

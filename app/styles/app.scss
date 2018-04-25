@@ -164,15 +164,32 @@ h1 {
        flex: 1;
        text-align: center;
        padding: 15px;
+       &.name{
+         flex: 2;
+       }
+       &.qty{
+         flex: 0;
+         flex-basis: 100px;
+       }
+      &.total-price{
+        direction: rtl;
+        text-align: right;
+      }
      }
    }
 
  }
-.product-title{
+ul.product-title{
   border-bottom: 3px dotted #a6a6a6;
   text-transform: uppercase;
   color: #6B6464;
   font-weight: bold;
+  li {
+    padding: 35px 0;
+  }
+  li.name{
+    flex: 1.9;
+    }
 
 }
 .qty{
@@ -225,7 +242,7 @@ h1 {
 }
 
 .addProduct{
-  margin-top: 15px;
+  margin-top: 30px;
   button{
     background-color: #000000;
     color: #FFFFFF;
@@ -236,5 +253,21 @@ h1 {
     outline: 0;
     cursor: pointer;
 }
+}
+.product-item {
+  li:first-child{
+      text-align: left;
+  }
+  li.qty{
+    input{
+      width: 60px;
+    }
+  }
+}
+.product-item:not(:last-child){
+  border-bottom: 1ps solid grey;
+}
+.product-list {
+  background-color:  #F5F5F5;
 }
 

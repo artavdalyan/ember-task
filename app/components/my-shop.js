@@ -15,9 +15,16 @@ export default Component.extend({
       }
       this.get('store')
         .findRecord('shop', id)
-        .then(shop => shop.destroyRecord())
+        .then(shop=>{
+          Promise.all(shop.get('products')
+              .map(p => p.destroyRecord()))
+              .then(()=>{
+                shop.destroyRecord();
+              });
+             
+        })
     },
-    editShop(shop) {
+    editShop() {
       this.set('name', this.get('shop.name'));
       this.set('isEdit', false);
     },

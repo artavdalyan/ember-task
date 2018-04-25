@@ -1,9 +1,9 @@
 import Component from '@ember/component';
 import Ember from 'ember';
-
 const {inject} = Ember;
 export default Component.extend({
   store: inject.service(),
+  tagName:'',
   isEdit: false,
   name: '',
   qty: 0,
@@ -31,7 +31,7 @@ export default Component.extend({
       this.set('product.price', this.get('price'));
       this.set('isEdit', false);
      },
-    save(id) {
+    save() {
       this.get('product').save().then(() => {
         this.set('isEdit', false);
       })
