@@ -1,19 +1,41 @@
 <div class="product-block">
   <h1>{{model.name}}</h1>
-
   <div class="product-list">
     <ul class="product-title">
-      <li>name</li>
-      <li>qty</li>
-      <li>price</li>
+      <li class="name">name</li>
+      <li class="qty">qty</li>
+      <li class="price">price</li>
     </ul>
-    <ul class="">
-      <li>name</li>
-      <li>qty</li>
-      <li>price</li>
+    {{#each model.products as |product|}}
+      {{my-product product=product}}
+    {{/each}}
+    <ul class="product-item">
+      <li></li>
+      <li class="qty"></li>
       <li>
-        <i class="fas fa-pencil-alt"></i>
-        <i class="far fa-trash-alt"></i></li>
+        Total Price
+        <b>${{totalPrice}}</b>
+      </li>
     </ul>
   </div>
+  <div class="addProduct">
+    <button {{action "openModal"}}>Add Product</button>
+  </div>
 </div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog }}
+    <div class="modal">
+      <div class="modal-body">
+        {{input value = name placeholder='name'}}
+        {{input value = qty placeholder='qty' type="number"}}
+        {{input value = price placeholder='price' type="number"}}
+      </div>
+      <div class="modal-footer">
+        <button {{action 'create'}} >Save</button>
+        <button {{action  'cancel'}}> Cancel</button>
+      </div>
+
+    </div>
+  {{/modal-dialog}}
+{{/if}}

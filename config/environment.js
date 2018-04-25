@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'ember-task',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     firebase: {
       apiKey: 'AIzaSyB2GHn3xFk_O0TJLe8relY1lzuU6BCdwqg',
       authDomain: 'spring-builder.firebaseapp.com',

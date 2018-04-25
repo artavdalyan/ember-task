@@ -1,0 +1,26 @@
+<ul class="product-item">
+  {{#unless isEdit}}
+    <li>{{product.name}}</li>
+    <li class="qty">{{product.qty}}</li>
+    <li class="price">$ {{product.price}}
+      <span class="noEdit">
+           <i class="fas fa-pencil-alt edit" {{action 'editProduct'}}></i>
+           <i class="far fa-trash-alt delete" {{action 'deleteProduct' product.id}} ></i>
+        </span>
+    </li>
+    {{else}}
+    <li>
+      {{input  value=product.name}}
+    </li>
+    <li class="qty">
+      {{input  value=product.qty type='number'}}
+    </li>
+    <li class="price">{{input  value=product.price type='number'}}
+      <span class="edit">
+           <i class="fas fa-check save" {{action 'save'}}></i>
+           <i class="fas fa-ban  cancel" {{action 'cancel'}} ></i>
+        </span>
+    </li>
+  {{/unless}}
+
+</ul>
