@@ -1,9 +1,8 @@
 import Component from '@ember/component';
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
 
-const {inject} = Ember;
 export default Component.extend({
-  store: inject.service(),
+  store: service(),
   isEdit: true,
   errorMessage: false,
   name: '',
@@ -13,16 +12,13 @@ export default Component.extend({
       if (!value) {
         return;
       }
-      this.get('store')
-        .findRecord('shop', id)
-        .then(shop=>{
-          Promise.all(shop.get('products')
-              .map(p => p.destroyRecord()))
-              .then(()=>{
-                shop.destroyRecord();
-              });
-             
-        })
+      const shop = this.get('store')
+        .peekRecord('shop', id);
+      if(shop){
+        Promise.all(shop.get('products')
+          .map(p => p.destroyRecord()))
+          .then(()=>shop.destroyRecord());
+      }
     },
     editShop() {
       this.set('name', this.get('shop.name'));
@@ -40,15 +36,16 @@ export default Component.extend({
         this.set('errorMessage', true);
         return;
       }
-      this.get('store').findRecord('shop', id).then(shop => {
+      const shop = this.get('store').peekRecord('shop', id);
+      if(shop){
         shop.set('name', this.get('shop.name'));
         shop.save().then(() => {
           this.set('isEdit', true);
           this.set('errorMessage', false);
           this.set('name', '');
         });
+      }
 
-      });
     }
   }
 });

@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import Ember from 'ember';
+
 export default Route.extend({
   model(params) {
     return this.store.findRecord('shop', params.id);
@@ -39,7 +40,6 @@ export default Route.extend({
     this.controller.set('isShowingModal', false);
     this.controller.set('errorMessage', false);
     this.controller.set('name', '');
-
     this.controller.set('qty', 0);
     this.controller.set('price', 0);
   }

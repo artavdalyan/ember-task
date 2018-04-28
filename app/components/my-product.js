@@ -1,8 +1,8 @@
 import Component from '@ember/component';
-import Ember from 'ember';
-const {inject} = Ember;
+import { inject as service } from '@ember/service';
+
 export default Component.extend({
-  store: inject.service(),
+  store: service(),
   tagName:'',
   isEdit: false,
   name: '',
@@ -14,10 +14,12 @@ export default Component.extend({
       if (!value) {
         return;
       }
-      this.get('store')
-        .findRecord('product', id)
-        .then(p => p.destroyRecord())
-    },
+      const product = this.get('store')
+        .peekRecord('product', id);
+      if(product){
+        product.destroyRecord();
+      }
+      },
     editProduct() {
       this.set('name', this.get('product.name'));
       this.set('qty', this.get('product.qty'));
