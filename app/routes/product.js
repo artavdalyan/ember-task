@@ -3,30 +3,20 @@ import Ember from 'ember';
 
 export default Route.extend({
   model(params) {
-    return this.store.findRecord('shop', params.id);
+    return this.store.findRecord('shop', params.shop_id);
   },
   actions: {
     openModal() {
       this.controller.toggleProperty('isShowingModal');
     },
-    create(){
-      const name = this.controller.get('name');
-      const qty = this.controller.get('qty');
-      const price = this.controller.get('price');
-      const shop = this.controller.get('model');
-      const product = this.get('store').createRecord('product', {
-        name,
-        qty,
-        price,
-        shop
-      });
-      shop.get('products').pushObject(product);
-      product.save().then(() => {
-        shop.save().then(()=> {
-          this.setProp();
-        });
-
-      });
+    async create() {
+      const p = this.controller.getProperties('name', 'qty', 'price', 'model');
+      const {model} = p;
+      const product = this.get('store').createRecord('product', p);
+      model.get('products').pushObject(product);
+      await product.save();
+      await  model.save();
+      this.setProp();
     },
     cancel() {
       this.setProp();
@@ -37,10 +27,12 @@ export default Route.extend({
     this.setProp();
   },
   setProp() {
-    this.controller.set('isShowingModal', false);
-    this.controller.set('errorMessage', false);
-    this.controller.set('name', '');
-    this.controller.set('qty', 0);
-    this.controller.set('price', 0);
+    this.controller.setProperties({
+      isShowingModal: false,
+      errorMessage: false,
+      name: '',
+      qty: 0,
+      price: 0,
+    });
   }
 });

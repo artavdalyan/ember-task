@@ -30,8 +30,10 @@ export default Route.extend({
     this.setProp();
   },
   setProp() {
-    this.controller.set('isShowingModal', false);
-    this.controller.set('shopName', '');
-    this.controller.set('errorMessage', false);
+    this.controller.setProperties({
+      isShowingModal: false,
+      shopName: '',
+      errorMessage: ''
+    });
   }
 });

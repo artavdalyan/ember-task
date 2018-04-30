@@ -9,6 +9,6 @@ export default Model.extend({
   totalPrice: computed('products.@each.qty','products.@each.price', function () {
     return this.get('products').reduce((sum , p)=>{
       return sum + p.get('qty')*p.get('price')
-    },0) || 0;
+    },0) ;
   })
 });

@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
+import {inject as service} from '@ember/service';
 
 export default Component.extend({
   store: service(),
@@ -7,17 +7,17 @@ export default Component.extend({
   errorMessage: false,
   name: '',
   actions: {
-    deleteShop(id) {
-      const value = confirm('Are you sure you want delete this item')
+    async deleteShop(id) {
+      const value = confirm('Are you sure you want delete this item');
       if (!value) {
         return;
       }
       const shop = this.get('store')
         .peekRecord('shop', id);
-      if(shop){
-        Promise.all(shop.get('products')
-          .map(p => p.destroyRecord()))
-          .then(()=>shop.destroyRecord());
+      if (shop) {
+        await Promise.all(shop.get('products')
+          .map(p => p.destroyRecord()));
+        shop.destroyRecord();
       }
     },
     editShop() {
@@ -25,27 +25,25 @@ export default Component.extend({
       this.set('isEdit', false);
     },
     cancel() {
-      this.set('isEdit', true);
-      this.set('shop.name', this.get('name'));
-      this.set('errorMessage', false);
-      this.set('name', '');
+      this.setProperties({
+        isEdit: true,
+        errorMessage: false,
+        'shop.name': this.get('name'),
+         name: '',
+      });
     },
-    save(id) {
+    async save(id) {
       const name = this.get('shop.name');
       if (!name) {
         this.set('errorMessage', true);
         return;
       }
       const shop = this.get('store').peekRecord('shop', id);
-      if(shop){
-        shop.set('name', this.get('shop.name'));
-        shop.save().then(() => {
-          this.set('isEdit', true);
-          this.set('errorMessage', false);
-          this.set('name', '');
-        });
+      if (shop) {
+        await shop.save();
+        this.send('cancel');
+        this.set('shop.name', name);
       }
-
     }
   }
 });

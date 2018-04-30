@@ -1,9 +1,9 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
+import {inject as service} from '@ember/service';
 
 export default Component.extend({
   store: service(),
-  tagName:'',
+  tagName: '',
   isEdit: false,
   name: '',
   qty: 0,
@@ -16,23 +16,26 @@ export default Component.extend({
       }
       const product = this.get('store')
         .peekRecord('product', id);
-      if(product){
+      if (product) {
         product.destroyRecord();
       }
-      },
+    },
     editProduct() {
-      this.set('name', this.get('product.name'));
-      this.set('qty', this.get('product.qty'));
-      this.set('price', this.get('product.price'));
-      this.set('isEdit', true);
+      this.setProperties({
+        name: this.get('product.name'),
+        qty: this.get('product.qty'),
+        price: this.get('product.price'),
+        isEdit: true
+      });
     },
     cancel() {
-      this.set('isEdit', true);
-      this.set('product.name', this.get('name'));
-      this.set('product.qty', this.get('qty'));
-      this.set('product.price', this.get('price'));
-      this.set('isEdit', false);
-     },
+      this.setProperties({
+        'product.name': this.get('name'),
+        'product.qty': this.get('qty'),
+        'product.price': this.get('price'),
+        isEdit: false
+      });
+    },
     save() {
       this.get('product').save().then(() => {
         this.set('isEdit', false);
